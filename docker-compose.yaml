@@ -1,0 +1,19 @@
+
+version: "3"
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+    command: [nginx-debug, '-g', 'daemon off;']
+    volumes:
+      - $PWD/nginx/public:/var/www/html/
+      - $PWD/nginx/conf.d/ssi.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+  header:
+    container_name: header
+    build:
+      context: ./header
+    ports:
+      - "5001:5001"
